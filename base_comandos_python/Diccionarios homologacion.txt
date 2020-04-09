@@ -1,0 +1,44 @@
+Diccionarios utiles para la homologacion 
+
+"homologa_id = {""DIALOGO"":[1,2,4,5,9],""IBS"":[""CC"",""NIT"",""CE"",""PAS"",""RCN""]}"
+homologa_id_1 = pd.DataFrame(homologa_id)
+
+"fields = ['CODIGO_CIUDAD1', 'CITY1']"
+"homologa_ciudad = pd.read_excel('barrios_ciudades.xlsx',sep=' ', usecols=fields, dtype= str)"
+"homologa_ciudad.columns = ['DIALOGO', 'IBS']"
+
+"homologa_genero = {""DIALOGO"":[1,2],""IBS"":['M','F']}"
+homologa_genero  = pd.DataFrame(homologa_genero)
+homologa_genero['DIALOGO']= homologa_genero['DIALOGO'].astype(str)
+
+"homologa_estado_civil = {""DIALOGO"":[3,0,4,6,1,2,5],""IBS"":[4,0,3,3,1,2,5]}"
+homologa_estado_civil = pd.DataFrame(homologa_estado_civil)
+homologa_estado_civil['DIALOGO']= homologa_estado_civil['DIALOGO'].astype(str)
+homologa_estado_civil['IBS']= homologa_estado_civil['IBS'].astype(str)
+
+"homologa_nivel_academico = {""DIALOGO"":[0,1,2,3,4,5,6,7,8,9,10,11,12,13],""IBS"":[1,101,201,600,700,301,401,501,502,502,402,2,403,1]}"
+homologa_nivel_academico = pd.DataFrame(homologa_nivel_academico)
+homologa_nivel_academico['DIALOGO']= homologa_nivel_academico['DIALOGO'].astype(str)
+homologa_nivel_academico['IBS']= homologa_nivel_academico['IBS'].astype(str)
+
+"fields = ['ORIGEN', 'DESTINO']"
+"homologa_profesion = pd.read_excel('Profesion.xlsx', skipinitialspace=True, usecols=fields, encoding= 'ansi', dtype = str )"
+"homologa_profesion.columns=['DIALOGO', 'IBS']"
+homologa_profesion['DIALOGO']= homologa_profesion['DIALOGO'].astype(str)
+homologa_profesion['IBS']= homologa_profesion['IBS'].astype(str)
+
+"fields = ['BARRIO_DIALOGO1', 'BARRIO_IBS1']"
+"homologa_barrio = pd.read_excel('barrios_ciudades.xlsx',sep=' ', usecols=fields, dtype= str)"
+"homologa_barrio.columns = ['DIALOGO', 'IBS']"
+
+"homologa_tipo_local = {""DIALOGO"":['SIN DATO', 'PROPIA SIN HIPOTECA', 'PROPIO CON HIPOTECA', 'FAMILIAR', 'ARRENDADA','NaN'],""IBS"":[0,1,2,3,4,5]}"
+homologa_tipo_local = pd.DataFrame(homologa_tipo_local)
+
+"homologa_tipo_contrato = {""DIALOGO"":['INDEFINIDO', 'POR SERVICIOS', 'SIN VINCULO', 'TEMPORAL', 'TERMINO FIJO','NaN','APRENDIZ'],""IBS"":['INDEFINIDO','PRESTACION DE SERVICIOS', 'NaN', 'OBRA O LABOR CONTRATADA','FIJO', 'NaN', 'APRENDIZAJE']}"
+homologa_tipo_contrato = pd.DataFrame(homologa_tipo_contrato)
+
+"homologa_tipo_vivienda = {""DIALOGO"":['SIN DATO', 'PROPIA SIN HIPOTECA', 'PROPIO CON HIPOTECA', 'FAMILIAR', 'ARRENDADA','NaN'],""IBS"":[0,1,2,4,3,'NaN']}"
+homologa_tipo_vivienda = pd.DataFrame(homologa_tipo_vivienda)
+
+"homologa_cobertura_salud =  {""DIALOGO"":['EPS','ISS','NO POSEE','OTROS','SISBEN','PREPAGADA','PLAN COMPLEMENTARIO'],""IBS"":[1,3,5,5,2,10,11]}"
+homologa_cobertura_salud = pd.DataFrame(homologa_cobertura_salud)

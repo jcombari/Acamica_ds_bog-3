@@ -1,0 +1,38 @@
+Homologación Operaciones Anteriores
+
+#Librerias
+
+import pandas as pd #dataframe
+import os #direcciones
+import numpy as np
+import glob
+pd.set_option('display.max_rows', None) 
+
+path_input='\\192.168.0.16\Gerencia de Riesgos\SARC de GESTION\MODELOS_SARC_GESTION_R_201811_201912\ENTRADA_PD_CALC'
+os.chdir(r'\\192.168.0.16\Gerencia de Riesgos\SARC de GESTION\MODELOS_SARC_GESTION_R_201811_201912\ENTRADA_PD_CALC')
+os.getcwd()
+
+op_anteriores = pd.read_csv('OPERACIONES_ANTERIORES.txt',encoding = 'ansi', sep='\t',dtype={'id_credactual': np.object,'id_credant':np.object})
+path=r'\\192.168.0.16\Gerencia de Riesgos\Analisis de Riesgo\00. AREA MODELOS\48. BASES DE DATOS MODELOS\Python validación bases\Tablas para homologar'
+os.chdir(path) 
+homo_creditos= pd.read_csv('Homo_cod_cred2.txt', sep='\t', dtype={' Credito_dialogo': np.object,'credito_ibs': np.object})
+
+    # omologación de los números de crédito actual y anterior a IBS
+    op_anteriores2=op_anteriores.merge(homo_creditos, how='left', left_on='id_credactual', right_on=' Credito_dialogo')
+    op_anteriores2['credito_ibs']=np.where(op_anteriores2.credito_ibs.isnull(),op_anteriores2.id_credactual,op_anteriores2.credito_ibs)
+    op_anteriores2['id_credactual']=op_anteriores2['credito_ibs'].copy()
+    op_anteriores2.drop([' Credito_dialogo','credito_ibs'], axis=1, inplace=True)
+    op_anteriores3=op_anteriores2.merge(homo_creditos, how='left', left_on='id_credant', right_on=' Credito_dialogo')
+    op_anteriores3['credito_ibs']=np.where(op_anteriores3.credito_ibs.isnull(),op_anteriores3.id_credant,op_anteriores3.credito_ibs)
+    op_anteriores3['id_credant']=op_anteriores3['credito_ibs'].copy()
+    op_anteriores3.drop([' Credito_dialogo','credito_ibs'], axis=1, inplace=True)
+
+    op_anteriores4 = op_anteriores3.sort_values(['fecha_credant'],ascending=False) ## Ordena por fecha del mas reciente al mas antiguo 
+    op_anteriores5 = op_anteriores4.drop_duplicates(op_anteriores4.columns[op_anteriores4.columns.isin(['id_credant'])], keep='first') #Quita los duplicaos segun la columna que se le indique y el Keep mantiene el primer dato que en este caso es el más reciente dado el ordenamiento.
+    op_anteriores5.id_credant.duplicated().sum()# Valida que efectivamente no existan duplicados.
+
+
+    os.chdir(r'\\192.168.0.16\Gerencia de Riesgos\SARC de GESTION\MODELOS_SARC_GESTION_HOMOLOGADO\ENTRADA_BEHAVESCORE\HISTORICO_OPERACIONES_ANTERIORES')
+    op_anteriores5.to_csv('OPERACIONES_ANTERIORES.txt', index=False,  sep='\t', encoding='iso-8859-1') # Exportación del archivo 
+	
+

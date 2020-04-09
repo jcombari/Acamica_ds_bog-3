@@ -1,0 +1,1 @@
+df['repeticion']=df.groupby(['nro_credito'])['nro_credito'].transform('count')-1

@@ -1,0 +1,22 @@
+Exportación e importación de df 								
+								
+Importación  								
+								
+ En excel 								
+								
+"name = pd.read_excel('df.xlsx',sep=' ',dtype={'variable': np.object},sheet_name = 'nombre de la hoja')"								#Puede seleccionar la hoja con la que se va a trabajar
+								
+En csv								
+								
+"name = pd.read_csv('df.txt', sep='\t', dtype={'variable1': np.object,'variable2': np.object}, encoding = 'ansi')  "								
+"consolidado_csv = pd.concat([pd.read_cvs(file, sep=' ',skiprows=[0], encoding ='ansi') for file in filenames ])"							 # skiprows funciona para saltarse la primera fila y me tome de encabezado la siguiente	
+
+fields = ['star_name', 'ra']
+df = pd.read_csv('data.csv', skipinitialspace=True, usecols=fields, encoding= 'ansi')	### Skip spaces after delimiter. SALTAR ESPACIOS DESPUES DEL ; En el tabulador							
+
+Exportación 				
+							
+"df.to_csv('df.txt', index=False,  sep='\t', encoding='ansi')"								
+
+
+

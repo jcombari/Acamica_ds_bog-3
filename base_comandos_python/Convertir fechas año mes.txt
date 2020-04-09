@@ -1,0 +1,6 @@
+datetime 
+
+Cambiar fechas de dias mes año a año mes 
+
+df['fecha_2']= pd.to_datetime(df['fecha'], errors='coerce').dt.date.astype(str) # crea una nueva variable al df como copia de la fecha y convierte la fecha en un string
+df['fecha_2']=np.where((df['fecha']).isna(),df['fecha'],df['fecha_2'].str.slice(0,4)+df['fecha_2'].str.slice(5,7))

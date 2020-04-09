@@ -1,0 +1,14 @@
+Imputación de missing por la mediana
+
+for item in lista:
+    print(item)
+    variables[item+'_1'] = variables[item].fillna(variables[item].median())
+
+Imputación de Outliers superiores a percentil 0.95 y opciones para graficar los box plot antes y depues(#)
+
+for item in lista:
+    perc=variables[item].quantile(0.95)
+    print(item)
+    #sns.catplot(x= item, kind='box' , data=variables)
+    variables[item+'_2']=np.where(variables[item+'_1']>perc,perc,variables[item+'_1'])
+    aux=item+'_2'

@@ -1,0 +1,3 @@
+# Como hacer tablas cruzadas 
+
+pd.crosstab(pfile3.Respuesta.fillna('NaN'),pfile3.Respuesta_Original.fillna('NaN'),dropna=False, margins=True)

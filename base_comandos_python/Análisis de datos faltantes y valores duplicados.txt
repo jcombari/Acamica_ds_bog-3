@@ -1,0 +1,17 @@
+Analísis de Datos faltantes
+
+df.dropna(inplace = True, subset = ['variable'], axis=0) # elimina registros completos es decir filas de las celdas que esten vacias para la variable que pones en el subset. 
+df.fillna('NaN', inplace=True) # Le pone algún valor a los datos Missing en este caso 'NaN'
+
+Ordena 
+df1 = df.sort_values(['Variable'],ascending=False) # Ordena del mayor a menor si es por fecha del mas reciente al mas antiguo 
+
+mora_actual.sort_values(inplace=True,by=['id', 'corte','renovado'],ascending=[True, True, False] ) # Ordena por varias variables 
+
+duplicados
+
+df2 = df1.drop_duplicates(df1.columns[df1.columns.isin(['Variable'])], keep='first') # Quita los valores duplicados del df respecto a una variable en particular
+df2.Variable.duplicated().sum() # Comprobar que efectivamente no existen valores duplicados con respecto a la Variable
+df2.drop_duplicates(subset=['variable1', 'variable2'],inplace=True)
+
+

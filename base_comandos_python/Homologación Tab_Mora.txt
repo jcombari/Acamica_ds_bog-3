@@ -1,0 +1,53 @@
+Homologar Tab_Mora
+
+
+# Librerías a utilizar
+import pandas as pd #dataframe
+import os #direcciones
+import numpy as np
+import glob
+# In[1]:
+
+path_input='\\192.168.0.16\Gerencia de Riesgos\SARC de GESTION\MODELOS_SARC_GESTION\ENTRADA_BEHAVESCORE'
+os.chdir(r'\\192.168.0.16\Gerencia de Riesgos\SARC de GESTION\MODELOS_SARC_GESTION\ENTRADA_BEHAVESCORE')
+filenames=glob.glob('**/TAB_mora_**.txt', recursive=True)
+
+path=r'\\192.168.0.16\Gerencia de Riesgos\Analisis de Riesgo\00. AREA MODELOS\48. BASES DE DATOS MODELOS\Python validación bases\Tablas para homologar'
+os.chdir(path)
+tabla_id= pd.read_csv('Homo_Tipo_Id.txt', sep='\t', dtype={'IBS': np.object,'DIALOGO': np.object})
+
+# In [5]:
+total_tab_mora=[]
+total_tab_mora=pd.DataFrame(total_tab_mora)
+for file in filenames:
+    print(file)
+    os.chdir(r'\\192.168.0.16\Gerencia de Riesgos\SARC de GESTION\MODELOS_SARC_GESTION\ENTRADA_BEHAVESCORE')
+    tab_mora = pd.read_csv(file,encoding = 'ansi', sep='\t',dtype={'1tipoID': np.object,'ID':np.object,'OBLIGACION':np.object,'COD_CREDITO':np.object})
+    tab_mora['corte']=file[9:15]
+    tab_mora2=tab_mora.merge(tabla_id, how='left' ,left_on='1tipoID', right_on='DIALOGO')
+    tab_mora2['1tipoID']=tab_mora2['IBS'].copy()
+    tab_mora2.drop(['IBS','DIALOGO'], axis=1, inplace=True)
+    path=r'\\192.168.0.16\Gerencia de Riesgos\Analisis de Riesgo\00. AREA MODELOS\48. BASES DE DATOS MODELOS\Python validación bases\Tablas para homologar'
+    os.chdir(path) 
+    homo_creditos= pd.read_csv('Homo_cod_cred2.txt', sep='\t', dtype={' Credito_dialogo': np.object,'credito_ibs': np.object})  
+    tab_mora3=tab_mora2.merge(homo_creditos, how='left', left_on='OBLIGACION', right_on=' Credito_dialogo')
+    tab_mora3['credito_ibs']=np.where(tab_mora3.credito_ibs.isnull(),tab_mora3.OBLIGACION,tab_mora3.credito_ibs)
+    tab_mora3['OBLIGACION']=tab_mora3['credito_ibs'].copy()
+    tab_mora3.drop([' Credito_dialogo','credito_ibs'], axis=1, inplace=True)
+    path=r'\\192.168.0.16\Gerencia de Riesgos\Analisis de Riesgo\00. AREA MODELOS\48. BASES DE DATOS MODELOS\Python validación bases\Tablas para homologar'
+    os.chdir(path)
+    tabla_productos = pd.read_csv('Tabla Productos 16_05_2019.txt',encoding = 'ansi', sep='\t', dtype={'Linea de Credito': np.object,'Tipo de Linea': np.object})
+    tabla_productos=tabla_productos[['Linea de Credito', 'COD PRODUCTO']]
+    tabla_productos.columns=['linea', 'producto']
+    tab_mora4=tab_mora3.merge(tabla_productos, how='left', left_on='COD_CREDITO', right_on='linea')
+    tab_mora4.COD_CREDITO=tab_mora4['producto']
+    tab_mora4.drop(['producto','linea'], axis=1, inplace=True)
+    total_tab_mora=pd.concat([total_tab_mora, tab_mora4] , axis=0)
+    os.chdir(r'\\192.168.0.16\Gerencia de Riesgos\SARC de GESTION\MODELOS_SARC_GESTION_HOMOLOGADO\\ENTRADA_BEHAVESCORE')
+    tab_mora4.columns = tab_mora4.columns.str.strip().str.lower().str.replace(' ', '_').str.replace('(', '').str.replace(')', '').str.replace('@', '').str.replace('>', '').str.replace('á','a').str.replace('é','e').str.replace('í','i').str.replace('ó','o').str.replace('ú','u').str.replace(',','.')
+    tab_mora4.to_csv(file, index=False,  sep='\t', encoding='iso-8859-1')
+
+# In [5]:
+
+os.chdir(r'\\192.168.0.16\Gerencia de Riesgos\Analisis de Riesgo\00. AREA MODELOS\48. BASES DE DATOS MODELOS\Data_Homologada_Cosol')
+total_tab_mora.to_csv('base_Tab_Mora.txt', index=False,  sep='\t', encoding='iso-8859-1')

@@ -1,0 +1,47 @@
+#Crear una lista con el fin de análizar variables particulares del df. En este caso quiero que me incluya solo los nombres de las columnas de las variables del df que sean tipo float
+
+variables_continuas=list((sobreendeudamiento.select_dtypes(include='float64')).columns)
+
+#Cambiar el type de la variable
+
+df[variable]=df[variable].astype(float)
+
+df['variable']=df[variable'].astype(str)
+
+#Crear una variable nueva en el df 
+
+pfile['nombre del campo']= 'valor que quiero que tome la variable dentro de todo df'
+
+#LLave entre dos variables
+
+"df['llave'] =df['variable'].str.cat(df['variable2'], sep='_')"
+
+#Renombrar
+
+"df.rename(columns={'name1': 'name2'}, inplace=True)"
+
+#Renombrar todo el encabezado
+
+"df.columns=['nombre_campo1', 'nombre_campo2 ','nombre_campo3']"
+
+#Ordenar
+
+"new_order = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,25,26,27,28,29,24]"
+   df=df[df.columns[new_order]]
+
+Agregrar variable Dataframe
+
+df['corte']= valor que toma la variable 
+
+#Quitar variables para quedarme con las que necesito analizar 
+
+"df=df[['campo1', 'campo2 ','campo3']]"
+
+#Quitar una columna completa del dataframe
+df.drop(['variable','variable2'], axis=1, inplace=True)
+
+# Agregar una variable en la cual con respecto a otra me haga un aleatorio en un rango de las NaN ÚNICAMENTE y el resto me las deje 
+
+pfile['monto2'] = pfile['monto'].mask(pfile['monto'].isnull(),np.random.uniform(0, 5000000, size = pfile.shape[0]) )
+
+

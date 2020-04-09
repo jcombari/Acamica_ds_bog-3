@@ -1,0 +1,82 @@
+
+
+#Multiples gráficos en una sola figura
+
+
+figure(num=None, figsize=(10,5), dpi=90, facecolor='w', edgecolor='k')
+ax = plt.gca()
+porcentaje_consultas_prescore.plot(kind='line',x = ejex, y = ejey' ,ax=ax)
+plt.yticks(np.arange(10, 40, 5))
+porcentaje_consultas_prescore.plot(kind='line',x = ejex, y = ejey' ,ax=ax)
+plt.yticks(np.arange(10, 40, 5))
+porcentaje_consultas_prescore.plot(kind='line',x = ejex, y = ejey' ,ax=ax)
+plt.yticks(np.arange(10, 40, 5))
+porcentaje_consultas_prescore.plot(kind='line',x = ejex, y = ejey' ,ax=ax)
+plt.yticks(np.arange(10, 40, 5))
+
+import matplotlib.ticker as mtick
+fmt = '%.0f%%' # formato del eje y, e.g. '40%'
+yticks = mtick.FormatStrFormatter(fmt)
+ax.yaxis.set_major_formatter(yticks)
+plt.title('Porcentaje de solicitudes del Pre-score')
+plt.xlabel('Mes')
+plt.ylabel('Porcentaje')
+plt.savefig('Porcentaje de solicitudes por zona - Prescores general.png') #Guarda la figura
+plt.legend(bbox_to_anchor=(0.5,0), loc='lower center', ncol=4) #Muestra el cuadrode variables en un punto especifico
+plt.show()
+
+
+
+
+#Gráficar todas las columnas de un dataframe en una sola figura con los ejes compartidos
+
+fig, axes = plt.subplots(nrows=3, ncols=2, figsize=(10, 10), sharex=True)
+
+nombres=[] #Nombres de las columnas
+for column in df:
+    nombres.append(column)
+
+i = 0
+for row in axes:
+    for ax in row:
+        ax.set_title(nombres[i+1])
+        ax.plot(df['columna'] , df[nombres[i+1]])
+        i += 1
+        plt.xticks(rotation=90)
+        ax.xaxis.set_visible(True)
+        for tick in ax.get_xticklabels():
+            tick.set_rotation(90)
+plt.tight_layout()
+plt.savefig('Número de clientes por zona (individual) - zonas.png', dpi=100)
+plt.show()
+
+
+
+#Graficar columnas de un dataframe una a una en una sola figura
+
+figure(num=None, figsize=(10,5), dpi=90, facecolor='w', edgecolor='k')
+ax = plt.gca()
+df.plot(kind='line',x = 'columna' , y = 'Z.V.M+' ,ax=ax, color=['b'])
+df.plot(kind='line',x = 'columna' , y = 'Z.V.M' ,ax=ax, color=['orange'])
+df.plot(kind='line',x = 'columna' , y = 'Z.V.A' ,ax=ax, color=['g'])
+plt.title('Número de clientes por zona')
+plt.xlabel('Mes')
+plt.ylabel('Clientes')
+plt.savefig('Número de clientes por zona 2 - zonas.png')
+plt.show()
+
+
+
+
+
+
+#Grafico de barras con diferenciación de colores
+
+figure(num=None, figsize=(16,6), dpi=90, facecolor='w', edgecolor='k')
+ax = plt.gca()
+axes = cruzado_y.plot.bar(rot=0, subplots=False, width= 1, color=['#2E137E', 'cyan', 'black', 'green', 'orange', 'blue'], ax=ax)
+plt.title('Número de consultas del pre-score')
+plt.xlabel('Mes')
+plt.ylabel('Solicitudes')
+plt.savefig('Número de consultas del pre-score - zonas.png')
+plt.show()

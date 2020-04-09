@@ -1,0 +1,6 @@
+# Merge & Np.Where
+
+pfile2=pfile.merge(homologa_id_1, how='left', left_on='tipo_id', right_on='DIALOGO') # te pone al final del primer df el segundo df para hacer cruce
+pfile2.tipo_id=pfile2['IBS']
+
+df['variable1']=np.where(df.variable1.isnull(),df.variable2,df.variable1)

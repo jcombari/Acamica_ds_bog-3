@@ -1,0 +1,84 @@
+# Título con color (código hexadecimal) centrado
+<h1><center><font size =7 color="#B3172D">TEXTO</font> </center></h1> <!--color rojo-->
+<h1><font size =7 color="#094C73">TEXTO</font> </h1> <!--Color azul-->
+
+
+#Índice que realiza salto en el notebook a un text especifico
+# Índice:
+* [Definiciones](#def) <!--("#def" es la etiqueta para el salto de texto)-->
+* [¿Que son los perfiles de riesgo?](#per_riesgo)
+### Definiciones <a class="anchor" id="def"></a> <!--(Despúes del título se debe colocar el mismo ID "#def")-->
+
+
+
+#Lista con Markdown
+<dd>
+<ul> <!--Inicio de la lista-->
+  <li>nombre_del_item</li>
+  <li>nombre_del_item</li>
+</ul> <!--Fin de la lista-->
+</dd>
+
+
+#Lista numerada
+<ol>
+  <p>Título.</p>
+  <li>Primer item.</li>
+  <p>Título.</p>
+  <li>Segundo item.</li>
+</ol>
+
+
+#Lista numerada (Segunda forma)
+1. [Título](#título)<br>
+    1.1 [Primer item](#primero)<br>
+    1.2 [Segundo item](#segundo)<br>
+    1.3 [Tercer item](#pC)<br>
+2. [Título 2](#título2)<br>
+
+
+
+#Lista de chequeo
+<input type="checkbox"><br> Primera tarea
+<input type="checkbox"><br> Segunda tarea
+<input type="checkbox"><br> tercera tarea
+
+
+#Texto en negrita
+<dt>  Comercial  </dt>
+
+#Línea separadora entre códigos
+***
+---
+
+#Tablas
+<table style="width:100%">
+  <tr>
+    <th>Firstname</th> <!--Título primera columna-->
+    <th>Lastname</th> <!--Título segunda columna-->
+    <th>Age</th>	<!--Título tercera columna-->
+  </tr>
+  <tr>
+    <td>Jill</td> <!--primera fila primera columna-->
+    <td>Smith</td> <!--primera fila segunda columna-->
+    <td>50</td>	<!--primera fila tercera columna-->
+  </tr>
+  <tr>
+    <td>Jill</td> <!--segunda fila primera columna-->
+    <td>Smith</td> <!--segunda fila segunda columna-->
+    <td>50</td>	<!--segunda fila tercera columna-->
+  </tr>
+</table>
+
+
+
+#Insertar imagen de una ruta de tamaño especifico
+<h2>Imágen</h2>
+<img src="https://www.w3schools.com/images/picture.jpg" alt="Mountain" style="width:300px">
+
+
+#Insertar audio 
+<audio controls>
+  <source src="horse.mp3" type="audio/mpeg">
+Your browser does not support the audio element.
+</audio>

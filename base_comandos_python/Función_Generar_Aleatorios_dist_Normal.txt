@@ -1,0 +1,8 @@
+def fillNaN_with_unifrand(df):
+    a = df.values
+    m = np.isnan(a) # mask of NaNs
+    mu, sigma = df.mean(), df.std()
+    a[m] = np.random.normal(mu, sigma, size=m.sum())
+    return df
+
+df['column'] = df['column'].apply(fill_missing_from_Gaussian) 

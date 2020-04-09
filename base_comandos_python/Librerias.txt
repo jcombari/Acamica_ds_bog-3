@@ -1,0 +1,16 @@
+# Librerias 
+
+import pandas as pd #dataframe
+import os #direcciones
+import numpy as np #formato de variables la importar
+import glob# leer archivos con el mismo nombre de una ruta especifica
+import matplotlib.pyplot as plt # Graficar
+import seaborn as sns # Graficar
+pd.set_option('display.max_rows', None) # Para mirar las filas completas 
+import datetime as dt # hacer operaciones o convertir fecha 
+import matplotlib.pyplot as plt
+%matplotlib inline
+
+pd.options.display.float_format = '{:.2f}'.format # Para quitar notación cientifica 
+pd.set_option('display.max_colwidth', -1) # Muestre el print completo 
+pd.set_option('display.max_columns', None) # Mirar las columnas completas 

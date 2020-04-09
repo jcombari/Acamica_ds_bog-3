@@ -1,0 +1,17 @@
+def tasa_malo(BBDD_test, variable):
+    A_test=BBDD_test.pivot_table(index=variable,
+                    aggfunc={'marca_malo': np.sum})
+    aux=A_test.columns.map(lambda x: '_'.join([str(i) for i in x]))
+    A_test.columns = A_test.columns.get_level_values(0)
+    A_test.columns =aux
+    B_test=BBDD_test.pivot_table(index=variable, 
+                    aggfunc={'marca_malo': 'count'})
+    aux2=B_test.columns.map(lambda x: '_'.join([str(i) for i in x]))
+    B_test.columns = B_test.columns.get_level_values(0)
+    B_test.columns =aux
+    B_test.rename(columns=lambda x: x.replace("marca_malo_", "total_"), inplace=True)
+    
+    C_test=pd.concat([A_test,B_test],axis=1)
+    C_test.columns=['malo','total']
+    C_test['tasa_malo']=C_test['malo']/C_test['total']
+    return C_test

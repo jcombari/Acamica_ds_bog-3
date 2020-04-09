@@ -1,0 +1,29 @@
+#Preprocesamiento de las bases de datos 	
+	
+df.corte.value_counts(dropna=False).sort_index() # Cuenta que tan pobladas estan las variables por corte	
+	
+"df.info() # Indica los datos no null de cada variable del Dataframe, adicionalmente arroja el tipo de variable"	
+	
+df.isna().sum() # suma los valores NaN por variable del Dataframe 	
+	
+"df.set_index('corte').isna().sum(level=0) # Agrupa el df por corte y suma los NaN por variable, es útil para validar aquellas variables que cuentan con mas información dentro del dataframe"	
+	
+df.columns	#nombre exacto de las columnas de Df
+	
+df.head()	# Mirar los encabexados y fora del Df
+	
+#Para variables continuas 	
+	
+"df.describe() # Por variable continua del DF, da respuesta de los estadisticos principales (count , mean , std desviación estandar, minimo, maximo, percentil 25%,50%,75)"	
+	
+df.groupby('corte').describe() # Imprime el describe agrupado por una variable especifica en este caso por corte 	
+	
+	
+#Para varibales discretas 	
+	
+"print(df.pivot_table(index='corte', columns=variable,aggfunc={variable: 'count'})) # Cuenta que tan pobladas estan las variables por corte y la pone en una tabla separadas por los valores que toma el campo"	
+	
+	
+	
+	
+ 	

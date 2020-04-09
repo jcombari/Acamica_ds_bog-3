@@ -1,0 +1,50 @@
+Homologación Exorazon
+
+import pandas as pd #dataframe
+import os #direcciones
+import numpy as np #formato de variables a importar
+import glob
+
+
+#programa genérico, es decir, homologa histórico
+path_input='\\192.168.0.16\Gerencia de Riesgos\SARC de GESTION\MODELOS_SARC_GESTION\ENTRADA_BEHAVESCORE'
+os.chdir(r'\\192.168.0.16\Gerencia de Riesgos\SARC de GESTION\MODELOS_SARC_GESTION\ENTRADA_BEHAVESCORE')
+
+filenames=glob.glob('**/Exo_razon_**.txt', recursive=True) # Toma todos los archivos que se encuentran en la dirección path_input
+print(filenames)
+
+
+homologa_id = {"DIALOGO":[1,2,4,5,9],"IBS":["CC","NIT","CE","PAS","RCN"]}
+
+homologa_id_1 = pd.DataFrame(homologa_id)
+homologa_id_1
+
+
+pfile3=[]
+
+for file in filenames:
+    print(file)
+    os.chdir(r'\\192.168.0.16\Gerencia de Riesgos\SARC de GESTION\MODELOS_SARC_GESTION\ENTRADA_BEHAVESCORE')
+    pfile = pd.read_csv(file,encoding = 'ansi', sep='\t', dtype={'tipo_id':np.int64  ,'cedula':np.object })
+    pfile['corte']=file[10:16]
+    pfile2=pfile.merge(homologa_id_1, how='left', left_on='tipo_id', right_on='DIALOGO')
+    pfile2.tipo_id=pfile2['IBS']
+    pfile2.drop([ 'DIALOGO', 'IBS'], axis=1, inplace=True)
+    pfile2.fillna('NaN', inplace=True)
+    os.chdir(r'\\192.168.0.16\Gerencia de Riesgos\SARC de GESTION\MODELOS_SARC_GESTION_HOMOLOGADO\ENTRADA_BEHAVESCORE')
+    pfile2.to_csv(file, index=False,  sep='\t', encoding='iso-8859-1')
+    
+    print(pfile.shape)
+    print(pfile2.shape)
+
+
+exorazon=[]
+exorazon=pd.DataFrame(exorazon)
+os.chdir(r'\\192.168.0.16\Gerencia de Riesgos\SARC de GESTION\MODELOS_SARC_GESTION_HOMOLOGADO\\ENTRADA_BEHAVESCORE')
+filenames=glob.glob('**/Exo_razon_**.txt', recursive=True)
+
+consol_exorazon = pd.concat([pd.read_csv(file,encoding = 'ansi', sep='\t', dtype={'cedula': np.object, }) for file in filenames ])
+consol_exorazon.columns = consol_exorazon.columns.str.strip().str.lower().str.replace(' ', '_').str.replace('(', '').str.replace(')', '').str.replace('@', '').str.replace('>', '').str.replace('á','a').str.replace('é','e').str.replace('í','i').str.replace('ó','o').str.replace('ú','u').str.replace(',','.')
+
+os.chdir(r'\\192.168.0.16\Gerencia de Riesgos\Analisis de Riesgo\00. AREA MODELOS\48. BASES DE DATOS MODELOS\Data_Homologada_Cosol')
+consol_exorazon.to_csv('base_exorazon_201801-201903.txt', index=False,  sep='\t', encoding='iso-8859-1')

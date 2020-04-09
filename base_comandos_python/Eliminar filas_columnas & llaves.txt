@@ -1,0 +1,18 @@
+# Eliminar filas o registros de  variables o datos dependiendo un valor 
+df.drop(df.loc[df['grupo_credito']=='CORR'].index, inplace=True)
+df.drop(df.loc[df['grupo_credito']=='CRR2'].index, inplace=True)
+df.drop(df.loc[df['grupo_credito']=='DS02'].index, inplace=True)
+df.drop(df.loc[df['grupo_credito']=='DS03'].index, inplace=True)
+df.drop(df.loc[df['grupo_credito']=='LQ01'].index, inplace=True)
+
+
+#Eliminar columnas 
+
+df.drop('nombre_campo_columna', axis=1,inplace=True)
+
+# Llaves 
+
+df['llave'] =df['variable1'].str.cat(df['variable2'], sep='_')
+
+
+

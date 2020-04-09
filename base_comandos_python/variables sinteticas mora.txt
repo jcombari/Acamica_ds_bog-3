@@ -1,0 +1,289 @@
+
+
+
+Construcción de vector de mora
+
+
+
+In [673]:
+
+
+
+data_adm3['repeticion']=data_adm3.groupby(['nro_credito'])['nro_credito'].transform('count')-1
+data_adm3.sort_values(by=['nro_credito','corte'], inplace=True, ascending= [True, False])
+
+
+
+
+In [674]:
+
+
+
+data_adm3['mora_1m']= data_adm3['dias_de_mora'].copy()
+data_adm3['mora_2m']=np.where(data_adm3['nro_credito']==data_adm3['nro_credito'].shift(-1), data_adm3['dias_de_mora'].shift(-1),np.NaN)
+data_adm3['mora_3m']=np.where(data_adm3['nro_credito']==data_adm3['nro_credito'].shift(-2), data_adm3['dias_de_mora'].shift(-2),np.NaN)
+data_adm3['mora_4m']=np.where(data_adm3['nro_credito']==data_adm3['nro_credito'].shift(-3), data_adm3['dias_de_mora'].shift(-3),np.NaN)
+data_adm3['mora_5m']=np.where(data_adm3['nro_credito']==data_adm3['nro_credito'].shift(-4), data_adm3['dias_de_mora'].shift(-4),np.NaN)
+data_adm3['mora_6m']=np.where(data_adm3['nro_credito']==data_adm3['nro_credito'].shift(-5), data_adm3['dias_de_mora'].shift(-5),np.NaN)
+data_adm3['mora_7m']=np.where(data_adm3['nro_credito']==data_adm3['nro_credito'].shift(-6), data_adm3['dias_de_mora'].shift(-6),np.NaN)
+data_adm3['mora_8m']=np.where(data_adm3['nro_credito']==data_adm3['nro_credito'].shift(-7), data_adm3['dias_de_mora'].shift(-7),np.NaN)
+data_adm3['mora_9m']=np.where(data_adm3['nro_credito']==data_adm3['nro_credito'].shift(-8), data_adm3['dias_de_mora'].shift(-8),np.NaN)
+data_adm3['mora_10m']=np.where(data_adm3['nro_credito']==data_adm3['nro_credito'].shift(-9), data_adm3['dias_de_mora'].shift(-9),np.NaN)
+data_adm3['mora_11m']=np.where(data_adm3['nro_credito']==data_adm3['nro_credito'].shift(-10), data_adm3['dias_de_mora'].shift(-10),np.NaN)
+data_adm3['mora_12m']=np.where(data_adm3['nro_credito']==data_adm3['nro_credito'].shift(-11), data_adm3['dias_de_mora'].shift(-11),np.NaN)
+
+
+
+
+
+
+
+Construcción de variables sintéticas
+
+
+
+
+
+
+Mora bimestrales
+
+
+
+In [675]:
+
+
+
+for i in (np.arange(6)+1):
+    data_adm3['MORA_MAX_2M_bimestre'+(i).astype('str')] =data_adm3[['mora_'+(2*i-1).astype('str')+'m', 'mora_'+(2*i).astype('str')+'m']].fillna(0).values.max(1)
+
+
+
+
+In [676]:
+
+
+
+data_adm3.head()
+
+
+
+
+
+Out[676]:
+
+
+ 
+
+
+nro_credito
+
+id
+
+capital
+
+dias_de_mora
+
+corte
+
+cod_cred_ibs
+
+cod_cred_dialogo
+
+cod_cred
+
+fecha_tex
+
+Fecha
+
+Fecha_h
+
+Fecha_h1
+
+Fecha_h2
+
+Fecha_h3
+
+Fecha_h6
+
+repeticion
+
+mora_1m
+
+mora_2m
+
+mora_3m
+
+mora_4m
+
+mora_5m
+
+mora_6m
+
+mora_7m
+
+mora_8m
+
+mora_9m
+
+mora_10m
+
+mora_11m
+
+mora_12m
+
+MORA_MAX_2M_bimestre1
+
+MORA_MAX_2M_bimestre2
+
+MORA_MAX_2M_bimestre3
+
+MORA_MAX_2M_bimestre4
+
+MORA_MAX_2M_bimestre5
+
+MORA_MAX_2M_bimestre6
+
+
+2646712 109506582 27221244 0.00 0.00 202005.00 NaN NaN 109506582 30-Nov-19. nov-19 201911.00 201912.00 202001.00 202002.00 202005.00 0.00 0.00 nan nan nan nan nan nan nan nan nan nan nan 0.00 0.00 0.00 0.00 0.00 0.00 
+2834904 131688 52615074 4990416.71 0.00 202007.00 NaN NaN 131688 31-Ene-20. ene-20 202001.00 202002.00 202003.00 202004.00 202007.00 8.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 nan nan nan 0.00 0.00 0.00 0.00 0.00 0.00 
+2752899 131688 52615074 5047922.50 0.00 202006.00 NaN NaN 131688 31-Dic-19. dic-19 201912.00 202001.00 202002.00 202003.00 202006.00 8.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 nan nan nan nan 0.00 0.00 0.00 0.00 0.00 0.00 
+2667635 131688 52615074 5103502.28 0.00 202005.00 NaN NaN 131688 30-Nov-19. nov-19 201911.00 201912.00 202001.00 202002.00 202005.00 8.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 nan nan nan nan nan 0.00 0.00 0.00 0.00 0.00 0.00 
+2581727 131688 52615074 5157220.57 0.00 202004.00 NaN NaN 131688 31-Oct-19. oct-19 201910.00 201911.00 201912.00 202001.00 202004.00 8.00 0.00 0.00 0.00 0.00 0.00 0.00 nan nan nan nan nan nan 0.00 0.00 0.00 0.00 0.00 0.00 
+
+
+
+In [677]:
+
+
+
+#Mediana de las ultimas 6 mora bimestrales en el último año
+data_adm3['MEDIANA_BIMESTRE_12MESES']=data_adm3[['MORA_MAX_2M_bimestre1','MORA_MAX_2M_bimestre2', 'MORA_MAX_2M_bimestre3','MORA_MAX_2M_bimestre4', 'MORA_MAX_2M_bimestre5','MORA_MAX_2M_bimestre6']].quantile(0.5, axis=1)
+
+
+
+
+In [678]:
+
+
+
+#Diferencia mora bimestral máxima y mínima en el último año
+data_adm3['DIF_MAX_MIN_BIMESTRE_12MESES']=data_adm3[['MORA_MAX_2M_bimestre1','MORA_MAX_2M_bimestre2', 'MORA_MAX_2M_bimestre3',
+       'MORA_MAX_2M_bimestre4', 'MORA_MAX_2M_bimestre5',
+       'MORA_MAX_2M_bimestre6']].max(axis=1)-data_adm3[['MORA_MAX_2M_bimestre1','MORA_MAX_2M_bimestre2', 'MORA_MAX_2M_bimestre3',
+       'MORA_MAX_2M_bimestre4', 'MORA_MAX_2M_bimestre5',
+       'MORA_MAX_2M_bimestre6']].min(axis=1)
+
+
+
+
+
+
+
+Moras trimestrales
+
+
+
+In [679]:
+
+
+
+for i in (np.arange(4)+1):
+        data_adm3['MORA_MAX_3M_trimestre'+(i).astype('str')] =data_adm3[['mora_'+(3*i-2).astype('str')+'m', 'mora_'+(3*i-1).astype('str')+'m', 'mora_'+(3*i).astype('str')+'m']].fillna(0).values.max(1)
+
+
+
+
+In [680]:
+
+
+
+#Mediana de las ultima 4 mora trimestrales en el último año
+data_adm3['MEDIANA_TRIMESTRE_12MESES']=data_adm3[['MORA_MAX_3M_trimestre1','MORA_MAX_3M_trimestre2', 'MORA_MAX_3M_trimestre3',
+       'MORA_MAX_3M_trimestre4']].quantile(0.5, axis=1)
+
+
+
+
+In [681]:
+
+
+
+#Diferencia mora trimestral máxima y mínima en el último año
+data_adm3['DIF_MAX_MIN_TRIMESTRE_12MESES']=data_adm3[['MORA_MAX_3M_trimestre1','MORA_MAX_3M_trimestre2', 'MORA_MAX_3M_trimestre3',
+       'MORA_MAX_3M_trimestre4']].max(axis=1)-data_adm3[['MORA_MAX_3M_trimestre1','MORA_MAX_3M_trimestre2', 'MORA_MAX_3M_trimestre3',
+       'MORA_MAX_3M_trimestre4']].min(axis=1)
+
+
+
+
+
+
+
+Moras cuatrimestrales
+
+
+
+In [682]:
+
+
+
+for i in (np.arange(3)+1):
+        data_adm3['MORA_MAX_4M_cuatrimestre'+(i).astype('str')] =data_adm3[['mora_'+(4*i-3).astype('str')+'m','mora_'+(4*i-2).astype('str')+'m', 'mora_'+(4*i-1).astype('str')+'m', 'mora_'+(4*i).astype('str')+'m']].fillna(0).values.max(1)
+
+
+
+
+In [683]:
+
+
+
+#Mediana de las ultima 4 mora trimestrales en el último año
+data_adm3['MEDIANA_CUATRIMESTRE_12MESES']=data_adm3[['MORA_MAX_4M_cuatrimestre1','MORA_MAX_4M_cuatrimestre2', 'MORA_MAX_4M_cuatrimestre3']].quantile(0.5, axis=1)
+
+
+
+
+In [684]:
+
+
+
+#Diferencia mora cuatrimestral máxima y mínima en el último año
+data_adm3['DIF_MAX_MIN_CUATRIMESTRE_12MESES']=data_adm3[['MORA_MAX_4M_cuatrimestre1','MORA_MAX_4M_cuatrimestre2', 'MORA_MAX_4M_cuatrimestre3']].max( axis=1)-data_adm3[['MORA_MAX_4M_cuatrimestre1','MORA_MAX_4M_cuatrimestre2', 'MORA_MAX_4M_cuatrimestre3']].min( axis=1)
+
+
+
+
+
+
+
+Mora semestrales
+
+
+
+In [685]:
+
+
+
+for i in (np.arange(2)+1):
+        data_adm3['MORA_MAX_6M_semestre'+(i).astype('str')] =data_adm3[['mora_'+(6*i-5).astype('str')+'m','mora_'+(6*i-4).astype('str')+'m','mora_'+(6*i-3).astype('str')+'m','mora_'+(6*i-2).astype('str')+'m', 'mora_'+(6*i-1).astype('str')+'m', 'mora_'+(6*i).astype('str')+'m']].fillna(0).values.max(1)
+
+
+
+
+In [686]:
+
+
+
+#Mediana de las ultima 4 mora trimestrales en el último año
+data_adm3['MEDIANA_SEMESTRE_12MESES']=data_adm3[['MORA_MAX_6M_semestre1','MORA_MAX_6M_semestre2']].quantile(0.5, axis=1)
+
+
+
+
+In [687]:
+
+
+
+#Diferencia mora semestral máxima y mínima en el último año
+data_adm3['DIF_MAX_MIN_SEMESTRE_12MESES']=data_adm3[['MORA_MAX_6M_semestre1','MORA_MAX_6M_semestre2']].max(axis=1)-data_adm3[['MORA_MAX_6M_semestre1','MORA_MAX_6M_semestre2']].min(axis=1)
+
