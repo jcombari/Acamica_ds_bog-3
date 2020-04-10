@@ -5,7 +5,7 @@ Hola equipo!, en este repositorio colocaremos material relacionado con el curso 
 ## Contenido
 En una primera etapa vamos a tener dos carpetas,
 
-* Carpeta comandos python: donde colocaremos lo comandos básicas para realizar las diferentes etapas de una solución de analítica avanzada.
+* [Carpeta comandos python](https://github.com/jcombari/Acamica_ds_bog-3/tree/master/DataScience_en_mi_vida) donde colocaremos lo comandos básicas para realizar las diferentes etapas de una solución de analítica avanzada.
 
 * Carpeta data science en mi  vida: se encuentra la información relacionada sobre el tópico que quieren desarrollar en su lugar de trabajo.
 
