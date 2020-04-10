@@ -14,3 +14,5 @@ En una primera etapa vamos a tener dos carpetas,
 * [Trello del curso](https://trello.com/b/fIrzTQYy/ds-bog-3)
 
 * [Trello para retrospectiva](https://trello.com/b/2XRDFcsM/clase-35-retrods3-bogota)
+
+* [Python Data Science Handbook](https://github.com/jakevdp/PythonDataScienceHandbook)
