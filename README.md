@@ -20,3 +20,5 @@ En una primera etapa vamos a tener dos carpetas,
 * Videos para aprender sobre redes neuronales 
 
   * [¿Qué es una Red Neuronal? Parte 1](https://www.youtube.com/watch?v=MRIv2IwFTPg)
+  * [¿Qué es una Red Neuronal? Parte 2 : La Red](https://www.youtube.com/watch?v=uwbHOpp9xkc)
+  * [¿Qué es una Red Neuronal? Parte 3 : Backpropagation](https://www.youtube.com/watch?v=eNIqz_noix8)
