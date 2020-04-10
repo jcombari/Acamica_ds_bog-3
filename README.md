@@ -18,4 +18,5 @@ En una primera etapa vamos a tener dos carpetas,
 * [Python Data Science Handbook](https://github.com/jakevdp/PythonDataScienceHandbook)
 
 * Videos para aprender sobre redes neuronales 
+
 ** [¿Qué es una Red Neuronal? Parte 1](https://www.youtube.com/watch?v=MRIv2IwFTPg)
