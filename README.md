@@ -1,6 +1,5 @@
 # Acamica_ds_bog-3
 
-# README.MD
 Hola equipo
 En este repositorio colocaremos material relacionado con el curso de ciencia de datos de Acamica, cohorte noviembre 2019-junio 2020
 
