@@ -9,7 +9,7 @@ En una primera etapa vamos a tener dos carpetas,
 
 * [Carpeta data science en mi  vida](https://github.com/jcombari/Acamica_ds_bog-3/tree/master/DataScience_en_mi_vida) donde se encuentra la información relacionada sobre el tópico que quieren desarrollar en su lugar de trabajo.
 
-### Link de interés
+### Links de interés
 
 * [Trello del curso](https://trello.com/b/fIrzTQYy/ds-bog-3)
 
