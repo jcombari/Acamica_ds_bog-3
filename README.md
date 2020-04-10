@@ -19,4 +19,4 @@ En una primera etapa vamos a tener dos carpetas,
 
 * Videos para aprender sobre redes neuronales 
 
-** [¿Qué es una Red Neuronal? Parte 1](https://www.youtube.com/watch?v=MRIv2IwFTPg)
+  * [¿Qué es una Red Neuronal? Parte 1](https://www.youtube.com/watch?v=MRIv2IwFTPg)
